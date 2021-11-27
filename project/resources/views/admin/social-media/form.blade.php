@@ -1,5 +1,4 @@
 @extends('admin.includes.layout')
-
 @section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
@@ -8,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add User</h1>
+            <h1>Add Social Media</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,29 +34,41 @@
                     {{ session()->get('message') }}
                 </div>
                 @endif
-              <form id="quickForm" action="{{route('admin.users.store')}}" method="post">
+              <form id="quickForm" action="{{ $action }}" method="post">
                   @csrf
+                  @if ($method == 'PUT')
+                  @method('put')
+                  @endif
                 <div class="card-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input  type="input" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                    <label for="exampleInputEmail1">Name arabic</label>
+                    <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input  type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <label for="exampleInputEmail1">Name English</label>
+                    <input type="input" name="name[en]" value="{{ @$socialMedia->name['en'] }}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input  type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInputEmail1">Link</label>
+                    <input type="input" name="link" 
+                    value="{{ $socialMedia->link }}" class="form-control" 
+                    id="exampleInputEmail1" placeholder="Enter email">
+
+                    @error('link')
+                      <span>{{ $message }}</span>
+                    @enderror
+                    
                   </div>
+
                   <div class="form-group">
-                  <label for="exampleSelectBorder">Role</label>
-                  <select  class="custom-select form-control-border" name="role_id" id="exampleSelectBorder">
-                    <option></option>
-                    <option value="1">admin</option>
-                    <option value="2">user</option>
-                  </select>
-                </div>
+                    <label for="exampleInputEmail1">icon</label>
+                    <input type="input" name="icon" value="{{ $socialMedia->icon }}" 
+                    class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+
+                    @error('icon')
+                      <span>{{ $errors->first('icon') }}</span>
+                    @enderror
+                  </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\SocialMediaController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\admin\UserController;
+use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +23,26 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::fallback(function () {
+    return abort(404);
+    // return view('errors.404');  // incase you want to return view
+});
 
 Route::middleware('auth')->group(function () {
+    
     Route::middleware('role:admin')->prefix('dashboard')->as('admin.')->group(function () {
-        Route::get('/index', [DashboardController::class, 'index'])->name('index');
-        Route::get('/users', [UserController::class, 'users'])->name('users');
-        Route::get('/admins', [UserController::class, 'admins'])->name('admins');
-        Route::get('/create_user', [UserController::class, 'create_user'])->name('create_user');
-        Route::post('/add_user', [UserController::class, 'store_user'])->name('store_user');
+        Route::resource('social-media', SocialMediaController::class)
+        ->parameter('social-media', 'socialMedia')
+        ->except(['show']);
+        
 
+
+
+
+
+        Route::get('/index', [DashboardController::class, 'index'])->name('index');
+        Route::get('/admins', [UserController::class, 'admins'])->name('admins');
+        Route::resource('users', UserController::class);
         Route::get('/show_messages', [MessageController::class, 'index'])->name('message.index');
         Route::get('/messages/delete/{message}', [MessageController::class, 'delete'])->name('message.delete');
     });

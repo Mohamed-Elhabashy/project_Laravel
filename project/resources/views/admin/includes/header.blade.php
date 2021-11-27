@@ -217,7 +217,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{Route('admin.users')}}" class="nav-link">
+                <a href="{{Route('admin.users.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
@@ -229,9 +229,33 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{Route('admin.create_user')}}" class="nav-link">
+                <a href="{{Route('admin.users.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add User</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Social Media
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.social-media.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Social Media</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.social-media.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Social Media</p>
                 </a>
               </li>
             </ul>

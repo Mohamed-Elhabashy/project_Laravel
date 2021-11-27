@@ -8,7 +8,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function users()
+    public function index()
     {
         $users = User::select('name', 'email', 'profile_photo_path')->where('role_id', '2')->paginate(25);
         return View('admin.user.users', ['users' => $users]);
@@ -20,12 +20,12 @@ class UserController extends Controller
         return View('admin.user.users', ['users' => $users]);
     }
 
-    public function create_user()
+    public function create()
     {
         return View('admin.user.create');
     }
 
-    public function store_user(StoreUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
         User::create($request->all());
 
