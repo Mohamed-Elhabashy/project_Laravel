@@ -23,19 +23,29 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-Route::fallback(function () {
-    return abort(404);
-    // return view('errors.404');  // incase you want to return view
-});
-
+/*
+ Route::fallback(function () {
+|    return abort(404);
+|    // return view('errors.404');  // incase you want to return view
+| });
+*/
 Route::middleware('auth')->group(function () {
     
     Route::middleware('role:admin')->prefix('dashboard')->as('admin.')->group(function () {
+        /*
         Route::resource('social-media', SocialMediaController::class)
         ->parameter('social-media', 'socialMedia')
         ->except(['show']);
-        
-
+        */
+        Route::prefix('social-media')->as('social-media.')->group(function () {
+            Route::get('/index',[SocialMediaController::class, 'index'])->name('index');
+            Route::get('/create',[SocialMediaController::class, 'index'])->name('create');
+            Route::post('/store/{socialMedia}',[SocialMediaController::class, 'index'])->name('store');
+            Route::get('/edit/{socialMedia}',[SocialMediaController::class, 'edit'])->name('edit');
+            Route::put('/update/{socialMedia}',[SocialMediaController::class, 'update'])->name('update');
+            Route::get('/destroy/{socialMedia}',[SocialMediaController::class, 'destroy'])->name('destroy');
+            
+        });
 
 
 

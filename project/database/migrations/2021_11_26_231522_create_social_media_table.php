@@ -16,7 +16,6 @@ class CreateSocialMediaTable extends Migration
         Schema::create('social_media', function (Blueprint $table) {
             $table->id();
             $table->schemalessAttributes('name');
-            $table->string('link');
             $table->string('icon');
             $table->softDeletes();
             $table->timestamps();

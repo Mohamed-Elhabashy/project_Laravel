@@ -31,21 +31,23 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>icon</th>
                     <th>Name arabic</th>
                     <th>Name English</th>
                     <th>Link</th>
+                    <th>action</th>
                   </tr>
                   </thead>
                   <tbody>
                 @foreach($socialMedias as $socialMedia)
                   <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{$socialMedia->name['ar']}}</td>
+                    <td>{{$socialMedia->name['en']}}</td>
+                    <td>{{$socialMedia->link}}</td>
                     <td>
-                        icon
+                      <a class="btn btn-sm btn btn-success" href="{{ route('admin.social-media.edit',$socialMedia) }}">Edit</a>
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('admin.social-media.destroy',$socialMedia) }}">Delete</a>
                     </td>
-                    <td>{{$s->name['arabic']}}</td>
-                    <td>{{$u->name['english']}}</td>
-                    <td>{{$u->link}}</td>
                   </tr>
                 @endforeach
                   
@@ -53,10 +55,10 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>icon</th>
                     <th>Name arabic</th>
                     <th>Name English</th>
                     <th>Link</th>
+                    <th>action</th>
                   </tr>
                   </tfoot>
                 </table>

@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{Route('admin.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add User</li>
+              <li class="breadcrumb-item active">Add Social Media</li>
             </ol>
           </div>
         </div>
@@ -36,38 +36,31 @@
                 @endif
               <form id="quickForm" action="{{ $action }}" method="post">
                   @csrf
-                  @if ($method == 'PUT')
-                  @method('put')
-                  @endif
                 <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name arabic</label>
-                    <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                    <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" placeholder="Enter Name arabic">
+                    @error('name[ar]')
+                    <span class="badge bg-danger mt-2">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Name English</label>
-                    <input type="input" name="name[en]" value="{{ @$socialMedia->name['en'] }}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input type="input" name="name[en]" value="{{ @$socialMedia->name['en'] }}" class="form-control" placeholder="Enter Name English">
+                    @error('name[en]')
+                    <span class="badge bg-danger mt-2">{{ $message }}</span>
+                    @enderror
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Link</label>
                     <input type="input" name="link" 
                     value="{{ $socialMedia->link }}" class="form-control" 
-                    id="exampleInputEmail1" placeholder="Enter email">
+                     placeholder="Enter Link">
 
                     @error('link')
-                      <span>{{ $message }}</span>
+                      <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                     
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">icon</label>
-                    <input type="input" name="icon" value="{{ $socialMedia->icon }}" 
-                    class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-
-                    @error('icon')
-                      <span>{{ $errors->first('icon') }}</span>
-                    @enderror
                   </div>
                 </div>
                 <!-- /.card-body -->

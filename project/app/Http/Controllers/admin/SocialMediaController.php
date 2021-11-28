@@ -48,6 +48,7 @@ class SocialMediaController extends Controller
 
     public function destroy(SocialMedia $socialMedia)
     {
-        dd($socialMedia);
+        $socialMedia->delete();
+        return back();
     }
 }
