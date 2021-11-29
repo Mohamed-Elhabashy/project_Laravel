@@ -37,7 +37,7 @@
               <form id="quickForm" action="{{ $action }}" method="post">
                   @csrf
                 <div class="card-body">
-                <div class="form-group">
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Name arabic</label>
                     <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" placeholder="Enter Name arabic">
                     @error('name[ar]')

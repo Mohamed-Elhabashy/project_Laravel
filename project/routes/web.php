@@ -39,8 +39,8 @@ Route::middleware('auth')->group(function () {
         */
         Route::prefix('social-media')->as('social-media.')->group(function () {
             Route::get('/index',[SocialMediaController::class, 'index'])->name('index');
-            Route::get('/create',[SocialMediaController::class, 'index'])->name('create');
-            Route::post('/store/{socialMedia}',[SocialMediaController::class, 'index'])->name('store');
+            Route::get('/create',[SocialMediaController::class, 'create'])->name('create');
+            Route::post('/store',[SocialMediaController::class, 'store'])->name('store');
             Route::get('/edit/{socialMedia}',[SocialMediaController::class, 'edit'])->name('edit');
             Route::put('/update/{socialMedia}',[SocialMediaController::class, 'update'])->name('update');
             Route::get('/destroy/{socialMedia}',[SocialMediaController::class, 'destroy'])->name('destroy');
