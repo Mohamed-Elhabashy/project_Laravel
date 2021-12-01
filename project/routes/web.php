@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\SocialMediaController;
+use App\Http\Controllers\admin\WebsiteInformationController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\admin\UserController;
@@ -47,7 +48,11 @@ Route::middleware('auth')->group(function () {
             
         });
 
-
+        Route::prefix('website-information')->as('website-information.')->group(function () {
+            Route::get('/edit',[WebsiteInformationController::class, 'edit'])->name('edit');
+            Route::post('/update/{websiteInformation}',[WebsiteInformationController::class, 'update'])->name('update');
+            
+        });
 
 
         Route::get('/index', [DashboardController::class, 'index'])->name('index');

@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Social Media</h1>
+            <h1>edit seeting</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{Route('admin.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add Social Media</li>
+              <li class="breadcrumb-item active">edit seeting</li>
             </ol>
           </div>
         </div>
@@ -29,39 +29,37 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <!-- form start -->
-              @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-                @endif
-              <form id="quickForm" action="{{ $action }}" method="post">
-                  @csrf
+              <form id="quickForm" action="{{ route('admin.website-information.update',$websiteInformation) }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Name arabic</label>
-                    <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" placeholder="Enter Name arabic">
-                    @error('name.ar')
+                    <label for="exampleInputEmail1">address</label>
+                    <input type="input" name="address" value="{{ $websiteInformation->address }}" class="form-control" placeholder="Enter address">
+                    @error('address')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Name English</label>
-                    <input type="input" name="name[en]" value="{{ @$socialMedia->name['en'] }}" class="form-control" placeholder="Enter Name English">
-                    @error('name.en')
+                    <label for="exampleInputEmail1">phone</label>
+                    <input type="input" name="phone" value="{{  $websiteInformation->phone }}" class="form-control" placeholder="Enter phone">
+                    @error('phone')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                   </div>
+                  
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Link</label>
-                    <input type="input" name="link" 
-                    value="{{ $socialMedia->link }}" class="form-control" 
-                     placeholder="Enter Link">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="input" name="email" value="{{  $websiteInformation->email }}" class="form-control" placeholder="Enter Email">
+                    @error('email')
+                    <span class="badge bg-danger mt-2">{{ $message }}</span>
+                    @enderror
+                  </div>
+                  <img src="{{asset('uploads/websiteInformation/'.$websiteInformation->logo)}}" height="50px" class="my-5">
 
-                    @error('link')
-                      <span class="badge bg-danger mt-2">{{ $message }}</span>
-                    @enderror
-                    
-                  </div>
+                  <div class="form-group mb-3">    
+                    <label>logo</label>
+                    <input type="file" name="logo" class="form-control-file">
+                </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
