@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>All Register User</h1>
+            <h1>All Category</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{Route('admin.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Admins</li>
+              <li class="breadcrumb-item active">Category</li>
             </ol>
           </div>
         </div>
@@ -30,25 +30,21 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>image</th>
+                    <th>#</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>action</th>
                   </tr>
                   </thead>
                   <tbody>
-                @foreach($users as $u)
+                @foreach($Categories as $category)
                   <tr>
+                    <td>{{$loop->iteration}}</td>
                     <td>
-                    @if($u->profile_photo_path!=null)
-                        <img src="{{asset('uploads/user/'.$u->profile_photo_path)}}" height="50px">
-                        @endif
+                        {{$category->name}}
                     </td>
-                    <td>{{$u->name}}</td>
-                    <td>{{$u->email}}</td>
                     <td>
-                      <a class="btn btn-sm btn btn-success" href="">Edit</a>
-                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="">Delete</a>
+                      <a class="btn btn-sm btn-success" href="{{route('admin.category.edit',$category)}}">Edit</a>
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{route('admin.category.destroy',$category)}}">Delete</a>
                     </td>
                   </tr>
                 @endforeach
@@ -56,10 +52,9 @@
                 </tbody>
                   <tfoot>
                   <tr>
-                    <th>image</th>
+                    <th>#</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>action</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -75,8 +70,6 @@
         </div>
         <!-- /.row -->
       </div>
-      
-      {{$users->links('admin.includes.paginate')}}
   <!-- /.content-wrapper -->
       <!-- /.container-fluid -->
     </section>

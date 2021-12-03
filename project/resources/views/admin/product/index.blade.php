@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>All Register User</h1>
+            <h1>Products</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{Route('admin.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Admins</li>
+              <li class="breadcrumb-item active">Products</li>
             </ol>
           </div>
         </div>
@@ -30,25 +30,37 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
+                    <th>#</th>
                     <th>image</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>Name English</th>
+                    <th>Name arabic</th>
+                    <th>description</th>
+                    <th>Price</th>
+                    <th>action</th>
                   </tr>
                   </thead>
                   <tbody>
-                @foreach($users as $u)
+                @foreach($products as $product)
                   <tr>
+                    <td>{{$loop->iteration}}</td>
                     <td>
-                    @if($u->profile_photo_path!=null)
-                        <img src="{{asset('uploads/user/'.$u->profile_photo_path)}}" height="50px">
-                        @endif
+                      @if($product->image!=null)
+                      <img src="{{asset('uploads/products/'.$product->image)}}" height="50px">
+                      @endif
                     </td>
-                    <td>{{$u->name}}</td>
-                    <td>{{$u->email}}</td>
                     <td>
-                      <a class="btn btn-sm btn btn-success" href="">Edit</a>
-                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="">Delete</a>
+                        {{$product->name['en']}}
+                    </td>
+                    <td>
+                      {{$product->name['ar']}}
+                    </td>
+                    <td>
+                      {{$product->description}}
+                      {{$product->price}}
+                    </td>
+                    <td>
+                      <a class="btn btn-sm btn-success" href="{{route('admin.product.edit',$product)}}">Edit</a>
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{route('admin.product.destroy',$product)}}">Delete</a>
                     </td>
                   </tr>
                 @endforeach
@@ -56,10 +68,13 @@
                 </tbody>
                   <tfoot>
                   <tr>
+                    <th>#</th>
                     <th>image</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                    <th>Name English</th>
+                    <th>Name arabic</th>
+                    <th>description</th>
+                    <th>Price</th>
+                    <th>action</th>
                   </tr>
                   </tfoot>
                 </table>
@@ -75,8 +90,6 @@
         </div>
         <!-- /.row -->
       </div>
-      
-      {{$users->links('admin.includes.paginate')}}
   <!-- /.content-wrapper -->
       <!-- /.container-fluid -->
     </section>

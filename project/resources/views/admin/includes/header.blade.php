@@ -223,7 +223,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{Route('admin.admins')}}" class="nav-link">
+                <a href="{{Route('admin.users.admins')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
@@ -260,6 +260,57 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Category
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.category.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.category.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Category</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Product
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @foreach ($Categories as $category)
+              <li class="nav-item">
+                <a href="{{ route('admin.product.index',$category) }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{ $category->name }}</p>
+                </a>
+              </li>
+              @endforeach
+              
+              <li class="nav-item">
+                <a href="{{ route('admin.product.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Product</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>

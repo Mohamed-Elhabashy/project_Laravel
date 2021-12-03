@@ -33,18 +33,23 @@
                     <th>image</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                @foreach($users as $u)
+                @foreach($users as $user)
                   <tr>
                     <td>
-                        @if($u->profile_photo_path!=null)
-                        <img src="{{asset('uploads/user/'.$u->profile_photo_path)}}" height="50px">
+                        @if($user->profile_photo_path!=null)
+                        <img src="{{asset('uploads/user/'.$user->profile_photo_path)}}" height="50px">
                         @endif
                     </td>
-                    <td>{{$u->name}}</td>
-                    <td>{{$u->email}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>
+                      <a class="btn btn-sm btn btn-success" href="">Edit</a>
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="">Delete</a>
+                    </td>
                   </tr>
                 @endforeach
                   
@@ -54,6 +59,7 @@
                     <th>image</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Action</th>
                   </tr>
                   </tfoot>
                 </table>

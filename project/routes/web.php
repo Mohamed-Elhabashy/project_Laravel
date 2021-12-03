@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\MessageController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SocialMediaController;
 use App\Http\Controllers\admin\SubscribeMailController;
 use App\Http\Controllers\admin\UserController;
@@ -38,6 +40,8 @@ Route::middleware('auth')->group(function () {
         ->parameter('social-media', 'socialMedia')
         ->except(['show']);
         */
+
+        Route::get('/index', [DashboardController::class, 'index'])->name('index');
         Route::prefix('social-media')->as('social-media.')->group(function () {
             Route::get('/index', [SocialMediaController::class, 'index'])->name('index');
             Route::get('/create', [SocialMediaController::class, 'create'])->name('create');
@@ -45,6 +49,23 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{socialMedia}', [SocialMediaController::class, 'edit'])->name('edit');
             Route::put('/update/{socialMedia}', [SocialMediaController::class, 'update'])->name('update');
             Route::get('/destroy/{socialMedia}', [SocialMediaController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('category')->as('category.')->group(function () {
+            Route::get('/index', [CategoryController::class, 'index'])->name('index');
+            Route::get('/create', [CategoryController::class, 'create'])->name('create');
+            Route::post('/store', [CategoryController::class, 'store'])->name('store');
+            Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('edit');
+            Route::post('/update/{category}', [CategoryController::class, 'update'])->name('update');
+            Route::get('/destroy/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+        });
+        Route::prefix('product')->as('product.')->group(function () {
+            Route::get('/index/{category}', [ProductController::class, 'index'])->name('index');
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+            Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('edit');
+            Route::post('/update/{product}', [ProductController::class, 'update'])->name('update');
+            Route::get('/destroy/{product}', [ProductController::class, 'destroy'])->name('destroy');
         });
 
         Route::prefix('website-information')->as('website-information.')->group(function () {
@@ -66,9 +87,15 @@ Route::middleware('auth')->group(function () {
             Route::post('/send/submit', [SubscribeMailController::class, 'SubmitSendMail'])->name('send.email.submit');
         });
 
-        Route::get('/index', [DashboardController::class, 'index'])->name('index');
-        Route::get('/admins', [UserController::class, 'admins'])->name('admins');
-        Route::resource('users', UserController::class);
+        Route::prefix('user')->as('users.')->group(function () {
+            Route::get('/index', [UserController::class, 'index'])->name('index');
+            Route::get('/admins', [UserController::class, 'admins'])->name('admins');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
+            Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
+            Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
         Route::get('/show_messages', [MessageController::class, 'index'])->name('message.index');
         Route::get('/messages/delete/{message}', [MessageController::class, 'delete'])->name('message.delete');
     });

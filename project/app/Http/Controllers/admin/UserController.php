@@ -31,4 +31,12 @@ class UserController extends Controller
 
         return back()->with('message', 'Added successfully!');
     }
+
+    public function destroy($user)
+    {
+        $user->delete();
+        dd(1);
+
+        return back();
+    }
 }
