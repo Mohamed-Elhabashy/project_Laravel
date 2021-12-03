@@ -270,9 +270,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.subscribe.mail.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>List Mails</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.subscribe.mail.trashed') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Trashed Email</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.subscribe.mail.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Email</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.subscribe.mail.send.email.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Send Email</p>
                 </a>
               </li>
             </ul>
