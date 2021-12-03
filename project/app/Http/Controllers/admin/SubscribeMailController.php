@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SendMailRequest;
 use App\Http\Requests\StoreSubscribeMailRequest;
 use App\Http\Requests\UpdateSubscribeMailRequest;
+use App\Jobs\SendEmailJob;
 use App\Models\SubscribeMail;
 use App\ViewModels\SubscribeMailViewModel;
 use Facade\FlareClient\View;
@@ -74,5 +76,22 @@ class SubscribeMailController extends Controller
     public function SendMail()
     {
         return View('admin.subscribe-mail.SendMail');
+    }
+
+    public function SubmitSendMail(SendMailRequest $request)
+    {
+        $details = [
+            'title' => $request->title,
+            'body' => $request->body
+        ];
+        $subscribes = SubscribeMail::get();
+        foreach ($subscribes as $subscribe) {
+            $details['email'] = $subscribe['email'];
+            //Mail::to($s['email'])->send(new SendSubscribe($data['title'], $data['body']));
+            dispatch(new SendEmailJob($details));
+        }
+        session()->flash('success', 'Email Send Successfully');
+
+        return back();
     }
 }

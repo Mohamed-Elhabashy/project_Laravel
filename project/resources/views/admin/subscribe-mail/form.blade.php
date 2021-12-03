@@ -32,11 +32,7 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <!-- form start -->
-              @if(session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
-                @endif
+             
               <form id="quickForm" action="{{ $action }}" method="post">
                   @csrf
                 <div class="card-body">

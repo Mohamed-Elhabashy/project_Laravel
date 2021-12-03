@@ -21,6 +21,9 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        @if(Session::has('success'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
+        @endif
         <div class="row">
           <!-- /.col -->
           <div class="col-md-12">
@@ -29,22 +32,23 @@
                 <h3 class="card-title">Send New Message</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <div class="form-group">
-                  <input class="form-control" placeholder="Subject:">
+              <form action="{{ route('admin.subscribe.mail.send.email.submit') }}" method="POST">
+                @csrf
+                <div class="card-body">
+                  <div class="form-group">
+                    <input class="form-control" name="title" placeholder="Subject:">
+                  </div>
+                  <div class="form-group">
+                      <textarea id="compose-textarea" name="body" class="form-control" style="height: 300px"></textarea>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                      
-                    </textarea>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <div class="float-right">
+                    <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                  </div>
                 </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                <div class="float-right">
-                  <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
-                </div>
-              </div>
+              </form>
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->

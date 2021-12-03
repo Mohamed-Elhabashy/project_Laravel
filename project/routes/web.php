@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/restore/{id}', [SubscribeMailController::class, 'restore'])->name('restore');
             Route::get('/delete/{id}', [SubscribeMailController::class, 'ForceDelete'])->name('force.delete');
             Route::get('/send/index', [SubscribeMailController::class, 'SendMail'])->name('send.email.index');
+            Route::post('/send/submit', [SubscribeMailController::class, 'SubmitSendMail'])->name('send.email.submit');
         });
 
         Route::get('/index', [DashboardController::class, 'index'])->name('index');
