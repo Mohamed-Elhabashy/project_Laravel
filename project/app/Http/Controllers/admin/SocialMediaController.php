@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
-use App\Models\SocialMedia;
 use App\Http\Requests\StoreSocialMediaRequest;
 use App\Http\Requests\UpdateSocialMediaRequest;
+use App\Models\SocialMedia;
 use App\ViewModels\SocialMediaViewModel;
 
 class SocialMediaController extends Controller
@@ -18,7 +19,7 @@ class SocialMediaController extends Controller
     {
         return View('admin.social-media.index', ['socialMedias' => SocialMedia::all()]);
     }
-    
+
     public function create()
     {
         return View('admin.social-media.form', new SocialMediaViewModel);
@@ -35,7 +36,6 @@ class SocialMediaController extends Controller
     public function edit(SocialMedia $socialMedia)
     {
         return View('admin.social-media.form', new SocialMediaViewModel($socialMedia));
-
     }
 
     public function update(UpdateSocialMediaRequest $request, SocialMedia $socialMedia)

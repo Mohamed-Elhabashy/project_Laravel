@@ -58,7 +58,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return View('admin.product.form', new ProductViewModel($product));
+        $categories = Category::get();
+        return View('admin.product.form', new ProductViewModel($product), ['categories' => $categories]);
     }
 
     /**
@@ -70,7 +71,9 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        $product->update($request->all());
+        $inputs = $request->except(['image']);
+        $inputs['image'] = $this->AddImage($request->image, $product->image);
+        $product->update($inputs);
         session()->flash('message', 'product updated Successfully');
         return back();
     }
@@ -83,16 +86,18 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        Storage::disk('uploads')->delete('products/'.$product->image);
         $product->delete();
         session()->flash('message', 'product delete Successfully');
         return back();
     }
 
-    public function AddImage($image)
+    public function AddImage($image, $OldImage = null)
     {
-        //dd(time().'.'.$image->extension());
-        dd(time().'.'.$image->extension());
-        $new_name_image = $image.date('Y-m-d H:i:s');
+        if ($OldImage != null) {
+            Storage::disk('uploads')->delete('products/'.$OldImage);
+        }
+        $new_name_image = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$image->extension();
         Image::make($image)->resize(450, 450)->save(public_path('uploads/products/'.$new_name_image));
         return $new_name_image;
     }

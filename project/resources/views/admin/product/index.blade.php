@@ -56,6 +56,8 @@
                     </td>
                     <td>
                       {{$product->description}}
+                    </td>
+                    <td>
                       {{$product->price}}
                     </td>
                     <td>
