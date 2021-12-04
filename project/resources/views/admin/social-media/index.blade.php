@@ -22,6 +22,11 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @endif
         <div class="row">
           <div class="col-12">
             <div class="card">

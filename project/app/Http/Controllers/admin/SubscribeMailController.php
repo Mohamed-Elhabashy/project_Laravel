@@ -47,7 +47,6 @@ class SubscribeMailController extends Controller
 
     public function destroy(SubscribeMail $subscribeMail)
     {
-        dd($subscribeMail);
         $subscribeMail->delete();
         session()->flash('success', 'Email deleted Successfully');
         return back();

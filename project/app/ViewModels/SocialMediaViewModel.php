@@ -16,14 +16,14 @@ class SocialMediaViewModel extends ViewModel
         // dd($this->socialMedia);
     }
 
-    public function action(): string
+    public function action() : string
     {
         return is_null($this->socialMedia->id)
             ? route('admin.social-media.store')
             : route('admin.social-media.update', ['socialMedia' => $this->socialMedia->id]);
     }
 
-    public function method(): string
+    public function method() : string
     {
         return is_null($this->socialMedia->id) ? 'POST' : 'PUT';
     }

@@ -41,7 +41,7 @@ class SocialMediaController extends Controller
     public function update(UpdateSocialMediaRequest $request, SocialMedia $socialMedia)
     {
         $socialMedia->update($request->all());
-        session()->flash('success', 'Social Media Created Successfully');
+        session()->flash('success', 'Social Media updated Successfully');
 
         return back();
     }
@@ -49,6 +49,7 @@ class SocialMediaController extends Controller
     public function destroy(SocialMedia $socialMedia)
     {
         $socialMedia->delete();
+        session()->flash('success', 'Social Media Deleted Successfully');
         return back();
     }
 }

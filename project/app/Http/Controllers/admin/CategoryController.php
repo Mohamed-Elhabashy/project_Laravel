@@ -80,7 +80,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        session()->flash('success', 'category deleted Successfully');
+        session()->flash('message', 'category deleted Successfully');
 
         return back();
     }

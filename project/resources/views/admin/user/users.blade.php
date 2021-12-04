@@ -22,6 +22,9 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        @if(Session::has('success'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
+        @endif
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -47,8 +50,9 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>
-                      <a class="btn btn-sm btn btn-success" href="">Edit</a>
-                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="">Delete</a>
+                      <a class="btn btn-sm btn btn-success" href="{{ route('admin.users.edit',$user) }}">Edit</a>
+                     
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('admin.users.destroy',$user) }}">Delete</a>
                     </td>
                   </tr>
                 @endforeach

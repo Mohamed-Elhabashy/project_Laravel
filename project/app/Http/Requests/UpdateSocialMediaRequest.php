@@ -14,8 +14,18 @@ class UpdateSocialMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'icon' => ['required'],
-            'link' => ['required'],
+            'name.ar' => ['required', 'string'],
+            'name.en' => ['required', 'string'],
+            'link' => ['required', 'string'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.ar.required' => 'Please add a name arabic',
+            'name.en.required' => 'Please add a name english',
+            'link.required' => 'Please add a link',
         ];
     }
 }

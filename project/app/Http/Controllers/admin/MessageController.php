@@ -16,6 +16,7 @@ class MessageController extends Controller
     public function delete(Message $message)
     {
         $message->delete();
+        session()->flash('message', 'message delete Successfully');
         return back();
     }
 }

@@ -42,12 +42,23 @@ Route::middleware('auth')->group(function () {
         */
 
         Route::get('/index', [DashboardController::class, 'index'])->name('index');
+
+        Route::prefix('user')->as('users.')->group(function () {
+            Route::get('/index', [UserController::class, 'index'])->name('index');
+            Route::get('/admins', [UserController::class, 'admins'])->name('admins');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
+            Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
+            Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
+
         Route::prefix('social-media')->as('social-media.')->group(function () {
             Route::get('/index', [SocialMediaController::class, 'index'])->name('index');
             Route::get('/create', [SocialMediaController::class, 'create'])->name('create');
             Route::post('/store', [SocialMediaController::class, 'store'])->name('store');
             Route::get('/edit/{socialMedia}', [SocialMediaController::class, 'edit'])->name('edit');
-            Route::put('/update/{socialMedia}', [SocialMediaController::class, 'update'])->name('update');
+            Route::post('/update/{socialMedia}', [SocialMediaController::class, 'update'])->name('update');
             Route::get('/destroy/{socialMedia}', [SocialMediaController::class, 'destroy'])->name('destroy');
         });
 
@@ -87,15 +98,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/send/submit', [SubscribeMailController::class, 'SubmitSendMail'])->name('send.email.submit');
         });
 
-        Route::prefix('user')->as('users.')->group(function () {
-            Route::get('/index', [UserController::class, 'index'])->name('index');
-            Route::get('/admins', [UserController::class, 'admins'])->name('admins');
-            Route::get('/create', [UserController::class, 'create'])->name('create');
-            Route::post('/store', [UserController::class, 'store'])->name('store');
-            Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
-            Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
-            Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
-        });
         Route::get('/show_messages', [MessageController::class, 'index'])->name('message.index');
         Route::get('/messages/delete/{message}', [MessageController::class, 'delete'])->name('message.delete');
     });

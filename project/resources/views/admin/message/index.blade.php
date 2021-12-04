@@ -39,17 +39,17 @@
                   </tr>
                   </thead>
                   <tbody>
-                @foreach($messages as $m)
+                @foreach($messages as $message)
                   <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>
-                        {{$m->user->name}}
+                        {{$message->user->name}}
                     </td>
-                    <td>{{$m->user->email}}</td>
-                    <td>{{$m->subject}}</td>
-                    <td>{{$m->message}}</td>
+                    <td>{{$message->user->email}}</td>
+                    <td>{{$message->subject}}</td>
+                    <td>{{$message->message}}</td>
                     <td>
-                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{route('admin.message.delete',$m)}}">Delete</a>
+                      <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{route('admin.message.delete',$message)}}">Delete</a>
                     </td>
                   </tr>
                 @endforeach

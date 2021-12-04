@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add User</h1>
+            <h1>Edit User</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{Route('admin.index')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add User</li>
+              <li class="breadcrumb-item active">Edit User</li>
             </ol>
           </div>
         </div>
@@ -36,19 +36,19 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{route('admin.users.store')}}" method="post">
+              <form id="quickForm" action="{{route('admin.users.update',$user)}}" method="post">
                   @csrf
                 <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input  type="input" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                    <input  type="input" name="name" value="{{$user->name}}" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
                     @error('name')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input  type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                    <input  type="email" name="email" value="{{$user->email}}" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                     @error('email')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
@@ -64,12 +64,20 @@
                   <label for="exampleSelectBorder">Role</label>
                   <select  class="custom-select form-control-border" name="role_id" id="exampleSelectBorder">
                     <option></option>
-                    <option value="1">admin</option>
-                    <option value="2">user</option>
+                    <option value="1" 
+                    @if ($user->role_id==1)
+                      selected
+                    @endif
+                    >admin</option>
+                    <option value="2"
+                    @if ($user->role_id==2)
+                    selected
+                    @endif
+                    >user</option>
                   </select>
                   @error('role_id')
-                    <span class="badge bg-danger mt-2">{{ $message }}</span>
-                    @enderror
+                  <span class="badge bg-danger mt-2">{{ $message }}</span>
+                  @enderror
                 </div>
                 </div>
                 <!-- /.card-body -->
