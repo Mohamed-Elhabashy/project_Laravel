@@ -28,7 +28,9 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        User::create($request->all());
+        $inputs = $request->except('password');
+        $inputs['password'] = bcrypt($request->password);
+        User::create($inputs);
         return back()->with('message', 'Added successfully!');
     }
 
