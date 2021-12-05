@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 10:19 AM
+-- Generation Time: Dec 05, 2021 at 06:33 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -41,7 +41,11 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'Mohameda', '2021-12-03 04:54:49', '2021-12-03 04:52:20', '2021-12-03 04:54:49'),
-(2, 'Mohamed', NULL, '2021-12-03 06:19:35', '2021-12-03 06:19:35');
+(2, 'Mohamed', '2021-12-04 03:04:40', '2021-12-03 06:19:35', '2021-12-04 03:04:40'),
+(3, 'Courses', '2021-12-04 03:05:44', '2021-12-04 03:05:35', '2021-12-04 03:05:44'),
+(4, 'Courses', NULL, '2021-12-04 03:25:05', '2021-12-04 03:25:05'),
+(5, 'c++', NULL, '2021-12-04 03:25:12', '2021-12-04 03:25:12'),
+(6, 'a', NULL, '2021-12-04 03:36:08', '2021-12-04 03:36:08');
 
 -- --------------------------------------------------------
 
@@ -90,14 +94,6 @@ CREATE TABLE `messages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `messages`
---
-
-INSERT INTO `messages` (`id`, `subject`, `message`, `user_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'a', 'a', 1, '0000-00-00 00:00:00', NULL, NULL),
-(2, '1', '1', 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -170,14 +166,23 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`name`)),
-  `price` double(8,2) NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(8,2) NOT NULL DEFAULT 0.00,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `description`, `image`, `category_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, '{\"ar\":\"w\",\"en\":\"w\"}', 2.00, 'w', 'AdminLTELogo1638585071.png', 2, NULL, NULL, '2021-12-04 00:31:11'),
+(2, '{\"ar\":\"\\u0634\",\"en\":\"asawqeqweqweqweqweqwe\"}', 125.00, 'a', 'AdminLTELogo1638584789.png', 2, '2021-12-04 00:31:47', '2021-12-04 00:26:29', '2021-12-04 00:31:47'),
+(3, '{\"ar\":\"a\",\"en\":\"a\"}', 125.00, 'a', 'AdminLTELogo1638595560.png', 4, NULL, '2021-12-04 03:26:01', '2021-12-04 03:26:01');
 
 -- --------------------------------------------------------
 
@@ -220,7 +225,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('M6vPTV3qOjy0zOW9mVdWxZQwcGMdr8dxyzP7j8ui', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTGFFZ0tSYUR6UmZKeTJ4cmdCenh0T2J5bkthaWFVOGZNcGs2cmd3ZyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJFZ1STQzSWFpaDR3aTBjc0RBbHpPa3VtUmRTSFNrcklNRXRMTm04MHM2bWVVUklJSk9qbkh1IjtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZC9wcm9kdWN0L2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFZ1STQzSWFpaDR3aTBjc0RBbHpPa3VtUmRTSFNrcklNRXRMTm04MHM2bWVVUklJSk9qbkh1Ijt9', 1638522957);
+('AKO2XJ3NUFapk5j740R2qe7DpbpcDrmQjc5f5F5M', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoienFtSXVCMEs0RGJOd2lORnVnbFc0MEJmUWEzZklvcEVtVERRUFBLbCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJFZ1STQzSWFpaDR3aTBjc0RBbHpPa3VtUmRTSFNrcklNRXRMTm04MHM2bWVVUklJSk9qbkh1IjtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0MzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZC91c2VyL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1638682306);
 
 -- --------------------------------------------------------
 
@@ -231,11 +236,18 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `social_media` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`name`)),
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `social_media`
+--
+
+INSERT INTO `social_media` (`id`, `name`, `link`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(6, '{\"ar\":\"\\u0641\\u064a\\u0633 \\u0628\\u0648\\u0643\",\"en\":\"facbook12\"}', 'facebook.com', NULL, '2021-12-04 03:35:39', '2021-12-04 03:35:52');
 
 -- --------------------------------------------------------
 
@@ -256,7 +268,7 @@ CREATE TABLE `subscribe_mails` (
 --
 
 INSERT INTO `subscribe_mails` (`id`, `email`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(2, 'a@gmail.com', NULL, '2021-12-01 22:43:20', '2021-12-03 01:50:40'),
+(2, 'a@gmail.com', '2021-12-04 03:27:04', '2021-12-01 22:43:20', '2021-12-04 03:27:04'),
 (3, 'MM@gmail.com1', NULL, '2021-12-01 22:44:19', '2021-12-03 02:02:24'),
 (6, 'admin@gmail.comaa', NULL, '2021-12-03 01:10:47', '2021-12-03 01:10:47');
 
@@ -289,7 +301,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `role_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, 'Mohamed', 'admin@gmail.com', NULL, '$2y$10$VuI43Iaih4wi0csDAlzOkumRdSHSkrIMEtLNm80s6meURIIJOjnHu', NULL, NULL, 'yXkhnPm4eLbMMtnwvvqOjBbotMHNuP6kcb8lDXSUd1dfGv1hiLsQh6L3qdiI', NULL, 'user2-160x160.jpg', 1, NULL, '2021-12-01 03:49:02', '2021-12-01 03:49:02'),
-(2, 'Mohamed', 'm@gmail.com', NULL, '123456789', NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-12-03 03:24:59', '2021-12-03 03:24:59');
+(7, 'Elhabashy', 'Elhabashy@gmail.com', NULL, '$2y$10$JhsHS7jX2.deyZ2llTwREuwGFtp7MpXrLq1XuIGzjm.bN3JEWUotK', NULL, NULL, NULL, NULL, NULL, 2, NULL, '2021-12-05 03:31:46', '2021-12-05 03:31:46');
 
 -- --------------------------------------------------------
 
@@ -422,7 +434,7 @@ ALTER TABLE `website_information`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -458,7 +470,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -470,7 +482,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `social_media`
 --
 ALTER TABLE `social_media`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subscribe_mails`
@@ -482,7 +494,7 @@ ALTER TABLE `subscribe_mails`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `website_information`
