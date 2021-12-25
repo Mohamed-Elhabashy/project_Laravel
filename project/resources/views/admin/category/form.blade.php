@@ -39,7 +39,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input type="input" name="name" value="{{ @$category->name }}" class="form-control" placeholder="Enter Name">
+                    <input type="input" name="name" value="{{ $category->name }}" class="form-control" placeholder="Enter Name">
                     @error('name')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror

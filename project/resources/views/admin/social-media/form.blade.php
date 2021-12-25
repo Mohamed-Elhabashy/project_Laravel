@@ -39,15 +39,15 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Name arabic</label>
-                    <input type="input" name="name[ar]" value="{{ @$socialMedia->name['ar'] }}" class="form-control" placeholder="Enter Name arabic">
-                    @error('name.ar')
+                    <input type="input" name="name_ar" value="{{ @$socialMedia->name_ar }}" class="form-control" placeholder="Enter Name arabic">
+                    @error('name_ar')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Name English</label>
-                    <input type="input" name="name[en]" value="{{ @$socialMedia->name['en'] }}" class="form-control" placeholder="Enter Name English">
-                    @error('name.en')
+                    <input type="input" name="name_en" value="{{ @$socialMedia->name_en }}" class="form-control" placeholder="Enter Name English">
+                    @error('name_en')
                     <span class="badge bg-danger mt-2">{{ $message }}</span>
                     @enderror
                   </div>

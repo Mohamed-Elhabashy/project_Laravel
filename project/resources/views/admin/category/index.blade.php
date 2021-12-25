@@ -22,7 +22,9 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+        @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -45,6 +47,21 @@
                     </td>
                     <td>
                       <a class="btn btn-sm btn-success" href="{{route('admin.category.edit',$category)}}">Edit</a>
+                      <!--
+                      |<form action="{{route('admin.category.destroy',$category)}}" method="POST" class="">
+                      | @csrf
+                      |@method('DELETE')
+                      <input type="submit" value="delete" class="btn btn-sm btn-danger">
+                      </form>
+                      !-->
+                      <a class="btn btn-sm btn btn-success" href="{{ route('admin.category.toggle.active',$category) }}">
+                       
+                        @if ($category->active=='yes')
+                            deactivate
+                        @else
+                            active
+                        @endif
+                      </a>
                       <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{route('admin.category.destroy',$category)}}">Delete</a>
                     </td>
                   </tr>

@@ -51,7 +51,14 @@
                     <td>{{$user->email}}</td>
                     <td>
                       <a class="btn btn-sm btn btn-success" href="{{ route('admin.users.edit',$user) }}">Edit</a>
-                     
+                      <a class="btn btn-sm btn btn-success" href="{{ route('admin.users.toggle.active',$user) }}">
+                       
+                        @if ($user->active=='yes')
+                            deactivate
+                        @else
+                            active
+                        @endif
+                      </a>
                       <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" href="{{ route('admin.users.destroy',$user) }}">Delete</a>
                     </td>
                   </tr>

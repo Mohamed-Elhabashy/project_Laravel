@@ -283,7 +283,29 @@
               </li>
             </ul>
           </li>
-
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Doctor
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.doctor.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Doctor List</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.doctor.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Doctor</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -370,9 +392,41 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{Route('front.home.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Go To Website
+                <i class="right fas fa-angle"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <form id="form__submit" action="{{route('logout')}}" method="POST">
+              @csrf
+              @method('')
+              <a href="#" onclick="submitForm()" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Logout
+                    <i class="right fas fa-angle"></i>
+                  </p>
+                </a>
+            </form>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
+
+
+
+
+<script>
+    function submitForm() {
+        let form = document.getElementById("form__submit");
+        form.submit();
+    }
+</script>

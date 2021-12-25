@@ -46,8 +46,8 @@
                 @foreach($socialMedias as $socialMedia)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{$socialMedia->name['ar']}}</td>
-                    <td>{{$socialMedia->name['en']}}</td>
+                    <td>{{$socialMedia->name_ar}}</td>
+                    <td>{{$socialMedia->name_en}}</td>
                     <td>{{$socialMedia->link}}</td>
                     <td>
                       <a class="btn btn-sm btn btn-success" href="{{ route('admin.social-media.edit',$socialMedia) }}">Edit</a>

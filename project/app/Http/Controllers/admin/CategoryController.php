@@ -79,9 +79,23 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        //dd($category);
         $category->delete();
         session()->flash('message', 'category deleted Successfully');
 
+        return back();
+    }
+
+    public function ToggleActive(Category $category)
+    {
+        if ($category->active == 'yes') {
+            $category->active = 'no';
+            session()->flash('message', 'category deactivate Successfully');
+        } else {
+            $category->active = 'yes';
+            session()->flash('message', 'category active Successfully');
+        }
+        $category->save();
         return back();
     }
 }

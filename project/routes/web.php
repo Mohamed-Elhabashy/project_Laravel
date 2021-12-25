@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\DoctorController;
 use App\Http\Controllers\admin\MessageController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SocialMediaController;
 use App\Http\Controllers\admin\SubscribeMailController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\WebsiteInformationController;
+use App\Http\Controllers\front\HomeController;
 use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 */
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -34,6 +33,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 | });
 */
 Route::middleware('auth')->group(function () {
+    Route::middleware('role:user')->as('front.')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    });
+
     Route::middleware('role:admin')->prefix('dashboard')->as('admin.')->group(function () {
         /*
         Route::resource('social-media', SocialMediaController::class)
@@ -51,6 +54,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
             Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
             Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+            Route::get('/toggle/active/{user}', [UserController::class, 'ToggleActive'])->name('toggle.active');
         });
 
         Route::prefix('social-media')->as('social-media.')->group(function () {
@@ -69,7 +73,21 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('edit');
             Route::post('/update/{category}', [CategoryController::class, 'update'])->name('update');
             Route::get('/destroy/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+            Route::get('/toggle/active/{category}', [CategoryController::class, 'ToggleActive'])->name('toggle.active');
         });
+        /*
+            |Route::prefix('doctor')->as('doctor.')->group(function () {
+            Route::get('/index', [DoctorController::class, 'index'])->name('index');
+            Route::get('/create', [DoctorController::class, 'create'])->name('create');
+            Route::post('/store', [DoctorController::class, 'store'])->name('store');
+            Route::get('/edit/{doctor}', [DoctorController::class, 'edit'])->name('edit');
+            Route::post('/update/{doctor}', [DoctorController::class, 'update'])->name('update');
+            Route::get('/destroy/{doctor}', [DoctorController::class, 'destroy'])->name('destroy');
+        });
+        */
+        Route::resource('doctor', DoctorController::class)
+        ->except(['show']);
+        //Route::resource('category', CategoryController::class);
         Route::prefix('product')->as('product.')->group(function () {
             Route::get('/index/{category}', [ProductController::class, 'index'])->name('index');
             Route::get('/create', [ProductController::class, 'create'])->name('create');

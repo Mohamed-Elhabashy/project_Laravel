@@ -18,8 +18,7 @@ class Role
     {
         if ($role == 'admin' && auth()->user()->role_id != 1) {
             abort(403);
-        }
-        if ($role == 'user' && auth()->user()->role_id != 2) {
+        } elseif (auth()->user()->active == 'no') {
             abort(403);
         }
         return $next($request);

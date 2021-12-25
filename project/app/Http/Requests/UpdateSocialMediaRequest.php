@@ -14,8 +14,8 @@ class UpdateSocialMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.ar' => ['required', 'string'],
-            'name.en' => ['required', 'string'],
+            'name_ar' => ['required', 'string'],
+            'name_en' => ['required', 'string'],
             'link' => ['required', 'string'],
         ];
     }
@@ -23,8 +23,8 @@ class UpdateSocialMediaRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.ar.required' => 'Please add a name arabic',
-            'name.en.required' => 'Please add a name english',
+            'name_ar.required' => 'Please add a name arabic',
+            'name_en.required' => 'Please add a name english',
             'link.required' => 'Please add a link',
         ];
     }

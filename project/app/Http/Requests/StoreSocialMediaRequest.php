@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSocialMediaRequest extends FormRequest
 {
- 
     public function authorize()
     {
         return true;
@@ -15,16 +14,17 @@ class StoreSocialMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'name.ar'=> ['required','string'],
-            'name.en'=> ['required','string'],
-            'link' => ['required','string'],
+            'name_ar' => ['required', 'string'],
+            'name_en' => ['required', 'string'],
+            'link' => ['required', 'string'],
         ];
     }
+
     public function messages()
     {
         return [
-            'name.ar.required' => 'Please add a name arabic',
-            'name.en.required' => 'Please add a name english',
+            'name_ar.required' => 'Please add a name arabic',
+            'name_en.required' => 'Please add a name english',
             'link.required' => 'Please add a link',
         ];
     }
