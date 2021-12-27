@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
-use App\Http\Requests\UpdateAppointmentRequest;
+use App\Models\Appointment;
 
 class AppointmentController extends Controller
 {
@@ -15,72 +14,25 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.appointment.index', ['appointments' => Appointment::paginate(25)]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreAppointmentRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreAppointmentRequest $request)
     {
-        //
+        $inputs = $request->all();
+        $inputs['user_id'] = auth()->user()->id;
+        $inputs['doctor_id'] = (int)$inputs['doctor_id'];
+        //dd($inputs);
+        Appointment::create($inputs);
+        session()->flash('message', 'appointment added Successfully');
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAppointmentRequest  $request
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateAppointmentRequest $request, Appointment $appointment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+        session()->flash('message', 'appointment deleted Successfully');
+
+        return back();
     }
 }

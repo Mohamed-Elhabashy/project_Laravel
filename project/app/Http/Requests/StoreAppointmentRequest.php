@@ -13,7 +13,7 @@ class StoreAppointmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'phone' => ['required', 'string'],
+            'date' => ['required', 'date'],
+            'doctor_id' => ['required', 'exists:doctors,id'],
+            'message' => ['nullable', 'string']
         ];
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\SocialMediaController;
 use App\Http\Controllers\admin\SubscribeMailController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\WebsiteInformationController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\front\HomeController;
 use App\Models\SocialMedia;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,8 @@ Route::middleware('auth')->group(function () {
         */
         Route::resource('doctor', DoctorController::class)
         ->except(['show']);
+        Route::resource('appointment', AppointmentController::class)
+        ->except(['show']);
         //Route::resource('category', CategoryController::class);
         Route::prefix('product')->as('product.')->group(function () {
             Route::get('/index/{category}', [ProductController::class, 'index'])->name('index');
@@ -118,5 +121,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/show_messages', [MessageController::class, 'index'])->name('message.index');
         Route::get('/messages/delete/{message}', [MessageController::class, 'delete'])->name('message.delete');
+        Route::post('/messages/store', [MessageController::class, 'store'])->name('message.store');
     });
 });

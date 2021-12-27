@@ -28,6 +28,7 @@ class HomeController extends Controller
             'linkedin' => SocialMedia::select('link')->where('name_en', 'linkedin')->firstOrFail()->link,
             'phone' => WebsiteInformation::select('phone')->firstOrFail()->phone,
             'email' => WebsiteInformation::select('email')->firstOrFail()->email,
+            'address' => WebsiteInformation::select('address')->firstOrFail()->address,
         ];
         return $WebsiteInfo;
     }

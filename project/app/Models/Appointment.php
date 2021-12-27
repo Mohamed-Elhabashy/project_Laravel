@@ -12,18 +12,11 @@ class Appointment extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
         'phone',
         'date',
         'user_id',
-        'category_id ',
         'doctor_id ',
     ];
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     public function user()
     {
